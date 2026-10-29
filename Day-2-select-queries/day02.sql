@@ -98,3 +98,146 @@ FROM students;
 SELECT *
 FROM employees;
 
+-- Retrieve all student columns
+SELECT *
+FROM students;
+
+-- Retrieve all product columns
+SELECT *
+FROM products;
+
+
+-- ============================================================
+-- TOPIC 4: SELECT DISTINCT
+-- ============================================================
+
+-- Retrieve unique departments
+SELECT DISTINCT department
+FROM employees;
+
+-- Retrieve unique courses
+SELECT DISTINCT course
+FROM students;
+
+-- Retrieve unique product categories
+SELECT DISTINCT category
+FROM products;
+
+-- Retrieve unique department and salary combinations
+SELECT DISTINCT department, salary
+FROM employees;
+
+
+-- ============================================================
+-- TOPIC 5: COLUMN ALIASES (AS)
+-- ============================================================
+
+-- Rename employee name column
+SELECT emp_name AS EmployeeName
+FROM employees;
+
+-- Rename employee name and salary
+SELECT
+    emp_name AS EmployeeName,
+    salary AS MonthlySalary
+FROM employees;
+
+-- Use aliases containing spaces
+SELECT
+    emp_name AS `Employee Name`,
+    salary AS `Monthly Salary`
+FROM employees;
+
+-- AS is optional in MySQL
+SELECT emp_name EmployeeName
+FROM employees;
+
+-- Student aliases exercise
+SELECT
+    student_id AS ID,
+    student_name AS `Student Name`,
+    course AS `Course Name`
+FROM students;
+
+
+-- ============================================================
+-- TOPIC 6: SELECT ARITHMETIC EXPRESSIONS
+-- ============================================================
+
+-- Calculate annual salary
+SELECT
+    emp_name,
+    salary,
+    salary * 12 AS annual_salary
+FROM employees;
+
+-- Add a fixed bonus of 5000
+SELECT
+    emp_name,
+    salary,
+    salary + 5000 AS total_salary
+FROM employees;
+
+-- Calculate 10% monthly salary bonus
+SELECT
+    emp_name,
+    salary,
+    salary * 0.10 AS bonus
+FROM employees;
+
+-- Calculate annual income after adding 5000 monthly
+SELECT
+    emp_name,
+    (salary + 5000) * 12 AS annual_income
+FROM employees;
+
+-- Calculate price including 18% GST
+SELECT
+    product_name,
+    price,
+    price + (price * 0.18) AS final_price
+FROM products;
+
+-- Calculate 18% GST amount only
+SELECT
+    product_name,
+    price,
+    price * 0.18 AS gst_amount
+FROM products;
+
+
+-- ============================================================
+-- TOPIC 7: FINAL SELECT PRACTICAL ASSESSMENT
+-- ============================================================
+
+-- QUESTION 1: Retrieve employee name, department, salary
+SELECT emp_name, department, salary
+FROM employees;
+
+-- QUESTION 2: Retrieve unique departments
+SELECT DISTINCT department
+FROM employees;
+
+-- QUESTION 3: Display readable column headings
+SELECT
+    emp_name AS `Employee Name`,
+    department AS `Department Name`,
+    salary AS `Monthly Salary`
+FROM employees;
+
+-- QUESTION 4: Annual salary including a 10% annual bonus
+SELECT
+    emp_name,
+    salary,
+    salary * 12 AS annual_salary,
+    (salary * 12) + (salary * 12) * 0.10
+        AS annual_salary_with_bonus
+FROM employees;
+
+-- QUESTION 5: Product price after 20% discount
+SELECT
+    product_name AS `Product Name`,
+    category AS Category,
+    price AS `Original Price`,
+    price - (price * 0.20) AS `Discounted Price`
+FROM products;
