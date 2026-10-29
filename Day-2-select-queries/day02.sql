@@ -205,3 +205,77 @@ SELECT
     price * 0.18 AS gst_amount
 FROM products;
 
+
+-- ============================================================
+-- TOPIC 7: FINAL SELECT PRACTICAL ASSESSMENT
+-- ============================================================
+
+-- QUESTION 1: Retrieve employee name, department, salary
+SELECT emp_name, department, salary
+FROM employees;
+
+-- QUESTION 2: Retrieve unique departments
+SELECT DISTINCT department
+FROM employees;
+
+-- QUESTION 3: Display readable column headings
+SELECT
+    emp_name AS `Employee Name`,
+    department AS `Department Name`,
+    salary AS `Monthly Salary`
+FROM employees;
+
+-- QUESTION 4: Annual salary including a 10% annual bonus
+SELECT
+    emp_name,
+    salary,
+    salary * 12 AS annual_salary,
+    (salary * 12) + (salary * 12) * 0.10
+        AS annual_salary_with_bonus
+FROM employees;
+
+-- QUESTION 5: Product price after 20% discount
+SELECT
+    product_name AS `Product Name`,
+    category AS Category,
+    price AS `Original Price`,
+    price - (price * 0.20) AS `Discounted Price`
+FROM products;
+
+
+-- ============================================================
+-- ADDITIONAL SELECT PRACTICE
+-- ============================================================
+
+-- Subtraction
+SELECT 100 - 25 AS difference;
+
+-- Multiplication
+SELECT 10 * 5 AS product_result;
+
+-- Division
+SELECT 100 / 4 AS division_result;
+
+-- Modulo (remainder)
+SELECT 10 % 3 AS remainder_result;
+
+-- Combined arithmetic expression
+SELECT (100 + 50) * 2 AS calculated_result;
+
+-- Annual salary using a shorter 10% bonus formula
+SELECT
+    emp_name,
+    salary * 12 * 1.10 AS annual_salary_with_bonus
+FROM employees;
+
+-- Discounted price using a shorter formula
+SELECT
+    product_name,
+    price * 0.80 AS discounted_price
+FROM products;
+
+
+-- ============================================================
+-- END OF SELECT CHAPTER
+-- NEXT TOPIC: WHERE CLAUSE
+-- ============================================================
