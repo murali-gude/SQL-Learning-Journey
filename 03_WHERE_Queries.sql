@@ -1,51 +1,97 @@
 
 -- ============================================================
--- TOPIC 4: BETWEEN AND NOT BETWEEN
+-- TOPIC 5: IN AND NOT IN OPERATORS
 -- ============================================================
 
--- 1. BETWEEN: Includes both boundary values
--- Employees earning between 35000 and 45000
+-- 1. IN OPERATOR
+-- IN matches any value in a specified list.
+
+-- Example 1: Employees working in IT or HR
 SELECT emp_name, department, salary
 FROM employees
-WHERE salary BETWEEN 35000 AND 45000;
+WHERE department IN ('IT', 'HR');
+
+-- Expected: Ravi, Priya, Arun, Kiran
+
+-- Equivalent query using OR
+SELECT emp_name, department, salary
+FROM employees
+WHERE department = 'IT' OR department = 'HR';
+
+-- Example 2: Employees earning 30000, 40000, or 50000
+SELECT emp_name, salary
+FROM employees
+WHERE salary IN (30000, 40000, 50000);
+
+-- Expected: Ravi, Priya, Arun
 
 -- PRACTICAL EXERCISE 1 - PASSED
--- Employees earning between 30000 and 40000
--- Expected: Ravi, Priya, Kiran
+-- Employees working in HR or Finance
 SELECT emp_name, department, salary
 FROM employees
-WHERE salary BETWEEN 30000 AND 40000;
+WHERE department IN ('HR', 'Finance');
 
--- 2. NOT BETWEEN: Values outside the specified range
--- Employees earning below 35000 or above 45000
-SELECT emp_name, department, salary
-FROM employees
-WHERE salary NOT BETWEEN 35000 AND 45000;
+-- Expected: Priya, Sneha, Kiran
 
 -- PRACTICAL EXERCISE 2 - PASSED
--- Employees earning below 30000 or above 40000
--- Expected: Arun, Sneha
+-- Employees earning exactly 30000, 35000, or 45000
 SELECT emp_name, department, salary
 FROM employees
-WHERE salary NOT BETWEEN 30000 AND 40000;
+WHERE salary IN (30000, 35000, 45000);
+
+-- Expected: Ravi, Sneha, Kiran
 
 -- ============================================================
--- INTERVIEW ASSESSMENT - TOPIC 4 - PASSED
+-- 2. NOT IN OPERATOR
+-- NOT IN excludes values matching the specified list.
 -- ============================================================
 
--- BETWEEN includes both minimum and maximum values.
--- NOT BETWEEN excludes the entire specified range,
--- including both boundary values.
-
--- Equivalent to BETWEEN 30000 AND 40000
+-- Example: Employees not working in IT or HR
 SELECT emp_name, department, salary
 FROM employees
-WHERE salary >= 30000 AND salary <= 40000;
+WHERE department NOT IN ('IT', 'HR');
 
--- Equivalent to NOT BETWEEN 30000 AND 40000
+-- Expected: Sneha
+
+-- PRACTICAL EXERCISE 3 - PASSED
+-- Employees not earning 30000, 35000, or 45000
 SELECT emp_name, department, salary
 FROM employees
-WHERE salary < 30000 OR salary > 40000;
+WHERE salary NOT IN (30000, 35000, 45000);
+
+-- Expected: Priya, Arun
+
+-- ============================================================
+-- INTERVIEW ASSESSMENT - TOPIC 5 - PASSED
+-- ============================================================
+
+-- QUESTION 1:
+-- What is the difference between IN and NOT IN?
+
+-- ANSWER:
+-- IN retrieves rows where a column value matches
+-- any value in a specified list.
+--
+-- NOT IN retrieves rows where a column value
+-- does not match any value in a specified list.
+--
+-- Note: NULL values require special handling.
+-- NOT IN with NULL in its list can produce
+-- unexpected results.
+
+-- Interview Example 1: IN
+SELECT emp_name, department
+FROM employees
+WHERE department IN ('IT', 'HR');
+
+-- Expected: Ravi, Priya, Arun, Kiran
+
+-- Interview Example 2: NOT IN
+SELECT emp_name, department
+FROM employees
+WHERE department NOT IN ('IT', 'HR');
+
+-- Expected: Sneha
 
 -- ============================================================
 -- PROGRESS
@@ -53,6 +99,6 @@ WHERE salary < 30000 OR salary > 40000;
 -- TOPIC 2: COMPARISON OPERATORS - COMPLETED
 -- TOPIC 3: LOGICAL OPERATORS - COMPLETED
 -- TOPIC 4: BETWEEN / NOT BETWEEN - COMPLETED
--- NEXT: TOPIC 5 - IN OPERATOR
+-- TOPIC 5: IN / NOT IN - COMPLETED
 -- ============================================================
   
