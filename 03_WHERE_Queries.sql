@@ -101,4 +101,3 @@ WHERE department NOT IN ('IT', 'HR');
 -- TOPIC 4: BETWEEN / NOT BETWEEN - COMPLETED
 -- TOPIC 5: IN / NOT IN - COMPLETED
 -- ============================================================
-  
