@@ -1,138 +1,88 @@
 
 -- =====================================================
--- TOPIC 6: LIKE OPERATOR
--- SUBTOPIC 3: NOT LIKE
+-- SQL LEARNING JOURNEY
+-- WHERE CLAUSE - TOPIC 7
+-- IS NULL AND IS NOT NULL
 -- =====================================================
 
--- NOT LIKE excludes values matching a pattern.
--- % represents zero or more characters.
--- _ represents exactly one character.
--- Examples assume a case-insensitive MySQL collation.
+-- NOTE:
+-- These queries assume the employees table contains
+-- emp_name, department, email, and bonus columns.
+-- Add the columns in MySQL if they do not exist.
 
+-- 1. IS NULL
+-- Retrieve employees whose email is missing.
 
--- =====================================================
--- PRACTICAL EXERCISE 1
--- Names that do NOT end with 'n'
--- =====================================================
-
-SELECT emp_name, department, salary
+SELECT emp_name, department, email
 FROM employees
-WHERE emp_name NOT LIKE '%n';
-
--- Expected: Ravi, Priya, Sneha
+WHERE email IS NULL;
 
 
--- =====================================================
--- PRACTICAL EXERCISE 2
--- Names that do NOT contain exactly 5 characters
--- =====================================================
+-- 2. IS NOT NULL
+-- Retrieve employees whose email is available.
 
-SELECT emp_name, department, salary
+SELECT emp_name, department, email
 FROM employees
-WHERE emp_name NOT LIKE '_____';
-
--- Expected: Ravi, Arun
+WHERE email IS NOT NULL;
 
 
--- =====================================================
--- PRACTICAL EXERCISE 3
--- Exclude names whose second character is 'i'
--- and whose length is at least 3 characters
--- =====================================================
+-- 3. IS NOT NULL WITH AND
+-- Retrieve IT employees with non-NULL emails.
 
-SELECT emp_name, department, salary
+SELECT emp_name, department, email
 FROM employees
-WHERE emp_name NOT LIKE '_i_%';
+WHERE department = 'IT'
+  AND email IS NOT NULL;
 
--- Expected: Ravi, Priya, Arun, Sneha
 
-
--- =====================================================
--- INTERVIEW QUESTION 1
--- Difference between LIKE and NOT LIKE
--- =====================================================
-
--- LIKE: Retrieve names starting with R
--- and containing at least 2 characters
+-- 4. IS NULL WITH SELECT *
+-- Retrieve all columns for employees with NULL emails.
 
 SELECT *
 FROM employees
-WHERE emp_name LIKE 'R_%';
-
--- Expected: Ravi
+WHERE email IS NULL;
 
 
--- NOT LIKE: Exclude names starting with R
--- and containing at least 2 characters
+-- 5. IS NOT NULL WITH SELECT *
+-- Retrieve all columns for employees with non-NULL emails.
 
 SELECT *
 FROM employees
-WHERE emp_name NOT LIKE 'R_%';
-
--- Expected: Priya, Arun, Sneha, Kiran
+WHERE email IS NOT NULL;
 
 
--- =====================================================
--- INTERVIEW QUESTION 2
--- Difference between NOT LIKE 'R%' and 'R_'
--- =====================================================
+-- 6. CHECK NULL BONUS
+-- Retrieve employees whose bonus is NULL.
 
--- Exclude all names starting with R
-
-SELECT emp_name
+SELECT *
 FROM employees
-WHERE emp_name NOT LIKE 'R%';
-
--- Expected: Priya, Arun, Sneha, Kiran
+WHERE bonus IS NULL;
 
 
--- Exclude only names containing exactly 2 characters
--- where the first character is R
+-- 7. IS NULL WITH OR AND AND
+-- Retrieve employees with NULL emails OR
+-- IT employees whose emails are NOT NULL.
 
-SELECT emp_name
+SELECT emp_name, department, email
 FROM employees
-WHERE emp_name NOT LIKE 'R_';
-
--- Expected: Ravi, Priya, Arun, Sneha, Kiran
-
-
--- =====================================================
--- INTERVIEW QUESTION 3
--- Combine NOT LIKE with AND
--- =====================================================
-
--- Retrieve employees whose names:
--- 1. Do not start with R
--- 2. Do not end with n
-
-SELECT emp_name, department, salary
-FROM employees
-WHERE emp_name NOT LIKE 'R%'
-  AND emp_name NOT LIKE '%n';
-
--- Expected: Priya, Sneha
+WHERE email IS NULL
+   OR (department = 'IT' AND email IS NOT NULL);
 
 
 -- =====================================================
--- IMPORTANT INTERVIEW REVISION NOTES
+-- INTERVIEW NOTES
 -- =====================================================
 
--- LIKE matches a specified pattern.
--- NOT LIKE excludes a specified pattern.
--- % matches zero or more characters.
--- _ matches exactly one character.
--- AND requires both conditions to be true.
---
--- LIKE 'R%'       : Names starting with R
--- NOT LIKE 'R%'   : Names not starting with R
--- LIKE 'R_'       : Exactly 2 characters, starting R
--- NOT LIKE 'R_'   : Excludes exactly 2-character R names
--- LIKE '_i_%'     : Second character i, minimum length 3
--- NOT LIKE '_i_%' : Excludes those matching names
---
--- Case sensitivity depends on the MySQL collation.
--- NOT LIKE does not return NULL values.
---
--- =====================================================
--- END OF TOPIC 6: LIKE AND NOT LIKE
--- =====================================================
+-- NULL means missing, unknown, or unavailable data.
+-- NULL is different from 0 and ''.
+-- 0 is a known numeric value.
+-- '' is a known string containing zero characters.
+-- IS NULL checks for NULL values.
+-- IS NOT NULL checks for non-NULL values.
+-- = NULL does not test for NULL correctly because
+-- the comparison evaluates to UNKNOWN.
+-- WHERE returns rows where the condition is TRUE.
+-- AND has higher precedence than OR.
+-- Parentheses make combined conditions clearer.
+
+-- END OF WHERE TOPIC 7
