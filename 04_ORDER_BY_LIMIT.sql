@@ -326,5 +326,4 @@ ORDER BY salary ASC;
 
 -- =====================================================
 -- END OF SUBTOPIC 2: ASC AND DESC
--- NEXT SUBTOPIC: ORDER BY MULTIPLE COLUMNS
 -- =====================================================
