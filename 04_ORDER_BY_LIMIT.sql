@@ -549,3 +549,236 @@ ORDER BY department ASC, salary DESC, emp_name ASC;
 -- END OF SUBTOPIC 3: ORDER BY MULTIPLE COLUMNS
 -- NEXT: ORDER BY WITH WHERE
 -- =====================================================
+
+-- =====================================================
+-- DAY 4: ORDER BY AND LIMIT
+-- SUBTOPIC 4: ORDER BY WITH WHERE
+-- =====================================================
+
+-- WHERE filters rows based on a condition.
+-- ORDER BY sorts the matching rows.
+-- SQL syntax: WHERE comes before ORDER BY.
+-- ORDER BY can also be used without WHERE.
+
+
+-- =====================================================
+-- 1. EXAMPLE 1 - FILTER IT AND SORT SALARY ASC
+-- =====================================================
+
+-- Display only IT employees.
+-- Sort their salaries from lowest to highest.
+
+SELECT emp_name, department, salary
+FROM employees
+WHERE department = 'IT'
+ORDER BY salary ASC;
+
+-- Expected output:
+-- Ravi | IT | 45000
+-- Arun | IT | 50000
+-- Anil | IT | 55000
+
+
+-- =====================================================
+-- 2. EXAMPLE 2 - FILTER SALARY AND SORT NAME DESC
+-- =====================================================
+
+-- Display employees earning more than 35000.
+-- Sort employee names from Z to A.
+
+SELECT emp_name, department, salary
+FROM employees
+WHERE salary > 35000
+ORDER BY emp_name DESC;
+
+-- Expected output:
+-- Sneha | Finance | 40000
+-- Ravi  | IT      | 45000
+-- Arun  | IT      | 50000
+-- Anil  | IT      | 55000
+
+
+-- =====================================================
+-- 3. PRACTICAL EXERCISE 1 - PASSED
+-- =====================================================
+
+-- Question:
+-- Retrieve emp_name, department, salary.
+-- Filter employees with salary greater than 40000.
+-- Sort salary from highest to lowest.
+
+SELECT emp_name, department, salary
+FROM employees
+WHERE salary > 40000
+ORDER BY salary DESC;
+
+-- Expected output:
+-- Anil | IT | 55000
+-- Arun | IT | 50000
+-- Ravi | IT | 45000
+
+-- Learning:
+-- ORDER BY salary DESC sorts by salary,
+-- not by employee name.
+
+-- Status: PASSED
+
+
+-- =====================================================
+-- 4. PRACTICAL EXERCISE 2 - PASSED
+-- =====================================================
+
+-- Question:
+-- Retrieve emp_name, department, salary.
+-- Display only IT and HR employees.
+-- Sort department ASC and salary DESC.
+
+SELECT emp_name, department, salary
+FROM employees
+WHERE department = 'IT' OR department = 'HR'
+ORDER BY department ASC, salary DESC;
+
+-- Expected output:
+-- Priya | HR | 35000
+-- Kiran | HR | 30000
+-- Anil  | IT | 55000
+-- Arun  | IT | 50000
+-- Ravi  | IT | 45000
+
+-- Alternative WHERE condition:
+-- WHERE department IN ('IT', 'HR')
+
+-- Learning:
+-- Each side of OR must be a valid condition.
+-- Incorrect: WHERE department = 'IT' OR 'HR'
+-- Correct:   WHERE department = 'IT'
+--            OR department = 'HR'
+
+-- Status: PASSED
+
+
+-- =====================================================
+-- 5. INTERVIEW QUESTION 1 - PASSED
+-- =====================================================
+
+-- Q1: What is the purpose of WHERE?
+-- Answer:
+-- WHERE filters rows based on conditions.
+
+-- Q2: What is the purpose of ORDER BY?
+-- Answer:
+-- ORDER BY sorts query results based on
+-- columns or expressions using ASC or DESC.
+
+-- Q3: Which clause comes first?
+-- Answer:
+-- WHERE comes before ORDER BY in SQL syntax.
+
+-- Q4: Can ORDER BY work without WHERE?
+-- Answer:
+-- Yes. ORDER BY can sort results without
+-- applying a WHERE filter.
+
+-- Example:
+
+SELECT emp_name, salary
+FROM employees
+WHERE salary > 40000
+ORDER BY salary DESC;
+
+-- Expected output:
+-- Anil | 55000
+-- Arun | 50000
+-- Ravi | 45000
+
+-- Status: PASSED
+
+
+-- =====================================================
+-- 6. INTERVIEW QUESTION 2 - PASSED
+-- =====================================================
+
+-- Given query:
+
+SELECT emp_name, department, salary
+FROM employees
+WHERE department = 'IT' AND salary >= 45000
+ORDER BY salary DESC, emp_name ASC;
+
+-- Q1: Which employees are selected?
+-- Answer:
+-- Ravi, Arun and Anil.
+-- All belong to IT and earn at least 45000.
+-- >= includes the boundary value 45000.
+
+-- Q2: What are the sorting priorities?
+-- Answer:
+-- First priority: salary DESC
+-- Second priority: emp_name ASC
+
+-- Q3: What is the expected output?
+-- Anil | IT | 55000
+-- Arun | IT | 50000
+-- Ravi | IT | 45000
+
+-- Q4: What happens without ORDER BY?
+-- Answer:
+-- The same matching employees are returned,
+-- but their row order is not guaranteed.
+
+-- Query without ORDER BY:
+
+SELECT emp_name, department, salary
+FROM employees
+WHERE department = 'IT' AND salary >= 45000;
+
+-- The result contains Ravi, Arun and Anil,
+-- but their order is not guaranteed.
+
+-- Status: PASSED
+
+
+-- =====================================================
+-- 7. IMPORTANT INTERVIEW NOTES
+-- =====================================================
+
+-- 1. WHERE filters rows.
+--
+-- 2. ORDER BY sorts the query result.
+--
+-- 3. WHERE appears before ORDER BY in SQL syntax.
+--
+-- 4. Filtering happens before final sorting
+--    in the logical query-processing sequence.
+--
+-- 5. ORDER BY supports ASC and DESC.
+--
+-- 6. ASC is the default sorting direction.
+--
+-- 7. ORDER BY supports multiple sorting columns.
+--
+-- 8. Different columns can use different
+--    sorting directions.
+--
+-- 9. WHERE supports AND, OR, IN, BETWEEN,
+--    LIKE and other filtering conditions.
+--
+-- 10. With OR, write complete comparisons
+--     or use IN for multiple allowed values.
+--
+-- 11. >= includes the specified boundary.
+--
+-- 12. ORDER BY can be used without WHERE.
+--
+-- 13. Removing ORDER BY does not change
+--     which rows satisfy WHERE.
+--
+-- 14. Without ORDER BY, result order
+--     is not guaranteed.
+--
+-- 15. ORDER BY does not modify stored data.
+
+
+-- =====================================================
+-- END OF SUBTOPIC 4: ORDER BY WITH WHERE
+-- =====================================================
