@@ -327,3 +327,225 @@ ORDER BY salary ASC;
 -- =====================================================
 -- END OF SUBTOPIC 2: ASC AND DESC
 -- =====================================================
+
+-- =====================================================
+-- SQL LEARNING JOURNEY
+-- DAY 4: ORDER BY AND LIMIT
+-- SUBTOPIC 3: ORDER BY MULTIPLE COLUMNS
+-- =====================================================
+
+-- ORDER BY can sort rows using multiple columns.
+-- The first column has the highest sorting priority.
+-- The second column is used when first-column
+-- values are equal.
+-- The third column is used when the first two
+-- sorting values are equal.
+--
+-- Different sorting directions can be combined.
+-- Example: ORDER BY department ASC, salary DESC;
+
+
+-- =====================================================
+-- 1. EXAMPLE 1 - DEPARTMENT ASC, SALARY DESC
+-- =====================================================
+
+-- Sort departments alphabetically (A to Z).
+-- Within each department, sort salaries
+-- from highest to lowest.
+
+SELECT emp_name, department, salary
+FROM employees
+ORDER BY department ASC, salary DESC;
+
+-- Expected output:
+-- Sneha  | Finance | 40000
+-- Priya  | HR      | 35000
+-- Kiran  | HR      | 30000
+-- Anil   | IT      | 55000
+-- Arun   | IT      | 50000
+-- Ravi   | IT      | 45000
+
+
+-- =====================================================
+-- 2. EXAMPLE 2 - DEPARTMENT ASC, SALARY ASC
+-- =====================================================
+
+-- Sort departments alphabetically (A to Z).
+-- Within each department, sort salaries
+-- from lowest to highest.
+
+SELECT emp_name, department, salary
+FROM employees
+ORDER BY department ASC, salary ASC;
+
+-- Expected output:
+-- Sneha  | Finance | 40000
+-- Kiran  | HR      | 30000
+-- Priya  | HR      | 35000
+-- Ravi   | IT      | 45000
+-- Arun   | IT      | 50000
+-- Anil   | IT      | 55000
+
+
+-- =====================================================
+-- 3. PRACTICAL EXERCISE 1
+-- =====================================================
+
+-- Question:
+-- Retrieve emp_name, department, and salary.
+-- Sort department DESC (Z to A).
+-- Within each department, sort salary ASC.
+
+SELECT emp_name, department, salary
+FROM employees
+ORDER BY department DESC, salary ASC;
+
+-- Expected output:
+-- Ravi   | IT      | 45000
+-- Arun   | IT      | 50000
+-- Anil   | IT      | 55000
+-- Kiran  | HR      | 30000
+-- Priya  | HR      | 35000
+-- Sneha  | Finance | 40000
+
+-- Status: PASSED
+
+
+-- =====================================================
+-- 4. PRACTICAL EXERCISE 2
+-- =====================================================
+
+-- Question:
+-- Retrieve emp_name, department, and salary.
+-- Sort salary from highest to lowest.
+-- If salaries are equal, sort names A to Z.
+
+SELECT emp_name, department, salary
+FROM employees
+ORDER BY salary DESC, emp_name ASC;
+
+-- Expected output:
+-- Anil   | IT      | 55000
+-- Arun   | IT      | 50000
+-- Ravi   | IT      | 45000
+-- Sneha  | Finance | 40000
+-- Priya  | HR      | 35000
+-- Kiran  | HR      | 30000
+
+-- Note:
+-- All salaries in this sample are different.
+-- Therefore, emp_name ASC does not change
+-- the output order.
+
+-- Status: PASSED
+
+
+-- =====================================================
+-- 5. INTERVIEW QUESTION 1
+-- =====================================================
+
+-- Q1: Which column has the first sorting priority?
+-- A: The first column listed in ORDER BY.
+
+-- Q2: When is the second sorting column used?
+-- A: When rows have equal values in the first
+--    sorting column.
+
+-- Q3: Can ASC and DESC be used together?
+-- A: Yes. Each sorting column can have its
+--    own sorting direction.
+
+SELECT emp_name, department, salary
+FROM employees
+ORDER BY department ASC, salary DESC;
+
+-- First priority: department ASC
+-- Second priority: salary DESC
+
+-- Interview Question 1: PASSED
+
+
+-- =====================================================
+-- 6. INTERVIEW QUESTION 2
+-- =====================================================
+
+-- Question:
+-- Explain sorting using three columns:
+-- department ASC, salary DESC, emp_name ASC.
+
+-- First priority: department ASC
+-- Second priority: salary DESC
+-- Third priority: emp_name ASC
+
+-- The third column is used when department
+-- and salary are both equal.
+
+SELECT emp_name, department, salary
+FROM employees
+ORDER BY department ASC, salary DESC, emp_name ASC;
+
+-- Interview assessment sample data:
+--
+-- Ravi  | IT | 45000
+-- Arun  | IT | 50000
+-- Anil  | IT | 50000
+-- Priya | HR | 35000
+-- Kiran | HR | 30000
+
+-- Expected output for the five-row sample:
+-- Priya | HR | 35000
+-- Kiran | HR | 30000
+-- Anil  | IT | 50000
+-- Arun  | IT | 50000
+-- Ravi  | IT | 45000
+
+-- Anil comes before Arun because their
+-- department and salary are equal, and
+-- emp_name ASC sorts their names A to Z.
+
+-- NOTE:
+-- This five-row sample is different from
+-- our original six-row employees table.
+-- The query will return results based on
+-- the actual data stored in MySQL.
+
+-- Interview Question 2: PASSED
+
+
+-- =====================================================
+-- 7. IMPORTANT INTERVIEW NOTES
+-- =====================================================
+
+-- 1. ORDER BY supports multiple sorting columns.
+--
+-- 2. Columns are separated using commas.
+--
+-- 3. The first column has highest priority.
+--
+-- 4. The second column resolves ties in
+--    the first column.
+--
+-- 5. The third column resolves ties in
+--    the first two columns.
+--
+-- 6. ASC and DESC can be mixed in one query.
+--
+-- 7. Each column can have its own direction.
+--
+-- 8. ASC is the default sorting direction.
+--
+-- 9. ORDER BY sorts result rows, not columns.
+--
+-- 10. ORDER BY does not modify stored data.
+--
+-- 11. When all specified sorting values are
+--     equal, row order is not guaranteed.
+--
+-- 12. Add another sorting column, such as
+--     a unique emp_id, for deterministic order.
+
+
+-- =====================================================
+-- END OF SUBTOPIC 3: ORDER BY MULTIPLE COLUMNS
+-- NEXT: ORDER BY WITH WHERE
+-- =====================================================
