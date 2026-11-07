@@ -782,3 +782,264 @@ WHERE department = 'IT' AND salary >= 45000;
 -- =====================================================
 -- END OF SUBTOPIC 4: ORDER BY WITH WHERE
 -- =====================================================
+
+-- =====================================================
+-- SQL LEARNING JOURNEY
+-- DAY 4: ORDER BY AND LIMIT
+-- SUBTOPIC 5: LIMIT
+-- =====================================================
+
+-- LIMIT restricts the maximum number of rows
+-- returned by a SELECT query.
+--
+-- Syntax:
+-- SELECT column1, column2
+-- FROM table_name
+-- LIMIT number_of_rows;
+--
+-- LIMIT 5 returns at most 5 rows.
+-- LIMIT does not delete or modify stored data.
+--
+-- Without ORDER BY, the rows returned by LIMIT
+-- are not guaranteed to be in a particular order.
+
+
+-- =====================================================
+-- 1. EXAMPLE 1 - DISPLAY FIRST 3 EMPLOYEES
+-- =====================================================
+
+-- Sort by emp_id ascending.
+-- Return only the first 3 employees.
+
+SELECT emp_name, department, salary
+FROM employees
+ORDER BY emp_id ASC
+LIMIT 3;
+
+-- Expected output:
+-- Ravi  | IT | 45000
+-- Priya | HR | 35000
+-- Arun  | IT | 50000
+
+
+-- =====================================================
+-- 2. EXAMPLE 2 - DISPLAY FIRST 2 EMPLOYEES
+-- =====================================================
+
+-- Sort by emp_id ascending.
+-- Return only the first 2 employees.
+
+SELECT emp_name, salary
+FROM employees
+ORDER BY emp_id ASC
+LIMIT 2;
+
+-- Expected output:
+-- Ravi  | 45000
+-- Priya | 35000
+
+
+-- =====================================================
+-- 3. PRACTICAL EXERCISE 1 - PASSED
+-- =====================================================
+
+-- Question:
+-- Retrieve emp_name, department and salary.
+-- Sort employees by emp_id ASC.
+-- Display only the first 4 employees.
+
+SELECT emp_name, department, salary
+FROM employees
+ORDER BY emp_id ASC
+LIMIT 4;
+
+-- Expected output:
+-- Ravi  | IT      | 45000
+-- Priya | HR      | 35000
+-- Arun  | IT      | 50000
+-- Sneha | Finance | 40000
+
+-- Learning:
+-- ORDER BY emp_id ASC determines the row order.
+-- LIMIT 4 returns the first four sorted rows.
+
+-- Status: PASSED
+
+
+-- =====================================================
+-- 4. PRACTICAL EXERCISE 2 - PASSED
+-- =====================================================
+
+-- Question:
+-- Retrieve emp_name, department and salary.
+-- Filter employees earning 35000 or more.
+-- Sort by salary from highest to lowest.
+-- Return only the top 3 employees.
+
+SELECT emp_name, department, salary
+FROM employees
+WHERE salary >= 35000
+ORDER BY salary DESC
+LIMIT 3;
+
+-- Expected output:
+-- Anil | IT | 55000
+-- Arun | IT | 50000
+-- Ravi | IT | 45000
+
+-- Learning:
+-- WHERE filters matching employees.
+-- ORDER BY sorts the matching employees.
+-- LIMIT restricts the final number of rows.
+
+-- Status: PASSED
+
+
+-- =====================================================
+-- 5. INTERVIEW QUESTION 1 - PASSED
+-- =====================================================
+
+-- Scenario:
+-- An employees table contains 100 records.
+
+SELECT emp_name, salary
+FROM employees
+LIMIT 5;
+
+-- Q1: What is the purpose of LIMIT?
+-- Answer:
+-- LIMIT restricts the maximum number of rows
+-- returned by a SELECT query.
+
+-- Q2: What does LIMIT 5 mean?
+-- Answer:
+-- It returns at most 5 rows.
+-- It does not mean the table has only 5 records.
+-- If fewer than 5 rows are available,
+-- fewer rows will be returned.
+
+-- Q3: Which 5 employees will be returned?
+-- Answer:
+-- Without ORDER BY, MySQL does not guarantee
+-- which 5 employees will be returned.
+
+-- Q4: Does LIMIT modify stored data?
+-- Answer:
+-- No. LIMIT in a SELECT query only restricts
+-- the number of returned rows.
+
+-- Interview Question 1: PASSED
+
+
+-- =====================================================
+-- 6. INTERVIEW QUESTION 2 - PASSED
+-- =====================================================
+
+-- Given query:
+
+SELECT emp_name, department, salary
+FROM employees
+WHERE salary >= 35000
+ORDER BY salary DESC
+LIMIT 2;
+
+-- Q1: Which employees satisfy WHERE?
+-- Answer:
+-- Anil  | IT      | 55000
+-- Arun  | IT      | 50000
+-- Ravi  | IT      | 45000
+-- Sneha | Finance | 40000
+-- Priya | HR      | 35000
+--
+-- Kiran is excluded because 30000 < 35000.
+-- The >= operator includes 35000.
+
+-- Q2: How are matching employees sorted?
+-- Answer:
+-- ORDER BY salary DESC sorts matching rows
+-- from highest salary to lowest salary.
+
+-- Q3: What is the final expected output?
+-- Answer:
+-- Anil | IT | 55000
+-- Arun | IT | 50000
+--
+-- WHERE selects 5 employees.
+-- ORDER BY sorts those 5 employees.
+-- LIMIT 2 returns only the first 2.
+
+-- Q4: What happens if LIMIT 2 becomes LIMIT 10?
+-- Answer:
+-- The query returns 5 rows because only
+-- 5 employees satisfy salary >= 35000.
+
+-- Example:
+
+SELECT emp_name, department, salary
+FROM employees
+WHERE salary >= 35000
+ORDER BY salary DESC
+LIMIT 10;
+
+-- Expected output:
+-- Anil  | IT      | 55000
+-- Arun  | IT      | 50000
+-- Ravi  | IT      | 45000
+-- Sneha | Finance | 40000
+-- Priya | HR      | 35000
+
+-- Interview Question 2: PASSED
+
+
+-- =====================================================
+-- 7. IMPORTANT INTERVIEW NOTES
+-- =====================================================
+
+-- 1. LIMIT restricts the maximum number of
+--    rows returned by a SELECT query.
+--
+-- 2. LIMIT 5 means at most 5 rows.
+--
+-- 3. If only 3 rows are available,
+--    LIMIT 5 returns 3 rows.
+--
+-- 4. LIMIT does not modify stored data
+--    when used with SELECT.
+--
+-- 5. Without ORDER BY, the returned row
+--    order is not guaranteed.
+--
+-- 6. Without ORDER BY, LIMIT does not
+--    guarantee which matching rows are chosen.
+--
+-- 7. ORDER BY should be used when a
+--    predictable selection is required.
+--
+-- 8. ORDER BY on a unique column such as
+--    emp_id provides deterministic ordering.
+--
+-- 9. LIMIT is written after ORDER BY
+--    in MySQL SELECT syntax.
+--
+-- 10. WHERE filters rows before the final
+--     ORDER BY and LIMIT operations.
+--
+-- 11. ORDER BY salary DESC LIMIT 3
+--     retrieves the top 3 rows by salary.
+--
+-- 12. LIMIT 10 does not guarantee 10 rows.
+--     It returns fewer if fewer are available.
+--
+-- 13. LIMIT is useful for displaying a
+--     small number of results.
+--
+-- 14. LIMIT can be combined with WHERE,
+--     ORDER BY and other SELECT clauses.
+--
+-- 15. LIMIT does not automatically sort
+--     results by salary, name or ID.
+
+
+-- =====================================================
+-- END OF SUBTOPIC 5: LIMIT
+-- =====================================================
